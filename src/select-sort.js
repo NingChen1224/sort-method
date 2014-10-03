@@ -38,35 +38,44 @@ var sortMethod = {
 			len = obj.length,
 			temp = null,
 			swap = null,
-			_asc = true;
+			_asc = true,
+			pos = -1;
 		asc && _asc = asc;
 		//正序
 		if(_asc){
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j > 0;j--){
-					if(typeof obj[j] === typeof obj[j-1]){
-						if(obj[j] < obj[j-1]){
-							swap = obj[j];
-							obj[j] = obj[j-1];
-							obj[j-1] = swap;
+				temp = obj[i];
+				for(j = i+1; j < len; j++){
+					if(typeof obj[j] === typeof temp){
+						if(obj[j] < temp){
+							temp = obj[j];
+							pos = j;
 						}
 					}else{
 						break;
 					}	
 				}
+				if(pos!=-1){
+					obj[i] = obj[pos];
+					obj[pos] = temp;
+				}
 			}
 		}else{//逆序
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j > 0; j--){
-					if(typeof obj[j] === typeof obj[i]){
-						if(obj[j] < obj[j-1]){
-							swap = obj[j];
-							obj[j] = obj[j-1];
-							obj[j-1] = swap;
+				temp = obj[i];
+				for(j = i+1; j < len; j++){
+					if(typeof obj[j] === typeof temp){
+						if(obj[j] > temp){
+							temp = obj[j];
+							pos = j;
 						}
 					}else{
 						break;
-					}
+					}	
+				}
+				if(pos!=-1){
+					obj[i] = obj[pos];
+					obj[pos] = temp;
 				}
 			}
 		}
@@ -76,34 +85,43 @@ var sortMethod = {
 			j, 
 			len = obj.length,
 			swap = null,
-			_asc = true;
+			_asc = true,
+			pos = -1;
 		asc && _asc = asc;
 		if(_asc){
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j > 0; j--){
-					if(typeof obj[j][field] === typeof obj[j-1][field]){
-						if(obj[j][field] < obj[j-1][field]){
-							swap = obj[j-1];
-							obj[j-1] = obj[j];
-							obj[j] = swap;
+				swap = obj[i][field];
+				for(j = i+1; j <len; j++){
+					if(typeof obj[j][field] === typeof swap){
+						if(obj[j][field] < swap){
+							swap = obj[j];
+							pos = j;
 						}
 					}else{
 						break;
 					}
 				}
+				if(pos!=-1){
+					obj[i] = obj[pos];
+					obj[pos] = swap;
+				}
 			}
 		}else{
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j > 0; j--){
-					if(typeof obj[j][field] === typeof obj[j-1][field]){
-						if(obj[j][field] > obj[j-1][field]){
-							swap = obj[j-1];
-							obj[j-1] = obj[j];
-							obj[j] = swap;
+				swap = obj[i][field];
+				for(j = i+1; j <len; j++){
+					if(typeof obj[j][field] === typeof swap){
+						if(obj[j][field] > swap){
+							swap = obj[j];
+							pos = j;
 						}
 					}else{
 						break;
 					}
+				}
+				if(pos!=-1){
+					obj[i] = obj[pos];
+					obj[pos] = swap;
 				}
 			}
 		}
