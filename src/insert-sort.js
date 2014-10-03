@@ -36,31 +36,32 @@ var sortMethod = {
 		var i, 
 			j, 
 			len = obj.length,
+			temp = null,
 			swap = null,
 			_asc = true;
 		asc && _asc = asc;
+		//正序
 		if(_asc){
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j < len; j++){
-					if(typeof obj[j] == typeof obj[i]){
-						if(obj[j] < obj[i]){
-							swap = obj[j];
-							obj[j] = obj[i];
-							obj[i] = swap;
-						}
-					}else{
-						break;
+				for(j = i+1; j > 0;j--)
+				if(typeof obj[j] === typeof obj[j-1]){
+					if(obj[j] < obj[j-1]){
+						swap = obj[j];
+						obj[j] = obj[j-1];
+						obj[j-1] = swap;
 					}
+				}else{
+					break;
 				}
 			}
-		}else{
+		}else{//逆序
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j < len; j++){
-					if(typeof obj[j] == typeof obj[i]){
-						if(obj[j] > obj[i]){
+				for(j = i+1; j > 0; j--){
+					if(typeof obj[j] === typeof obj[i]){
+						if(obj[j] < obj[j-1]){
 							swap = obj[j];
-							obj[j] = obj[i];
-							obj[i] = swap;
+							obj[j] = obj[j-1];
+							obj[j-1] = swap;
 						}
 					}else{
 						break;
@@ -78,12 +79,12 @@ var sortMethod = {
 		asc && _asc = asc;
 		if(_asc){
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j < len; j++){
-					if(typeof obj[j][field] == typeof obj[i][field]){
-						if(obj[j][field] < obj[i][field]){
-							swap = obj[j];
-							obj[j] = obj[i];
-							obj[i] = swap;
+				for(j = i+1; j > 0; j--){
+					if(typeof obj[j][field] === typeof obj[j-1][field]){
+						if(obj[j][field] < obj[j-1][field]){
+							swap = obj[j-1];
+							obj[j-1] = obj[j];
+							obj[j] = swap;
 						}
 					}else{
 						break;
@@ -92,12 +93,12 @@ var sortMethod = {
 			}
 		}else{
 			for(i = 0; i < len - 1; i++){
-				for(j = i+1; j < len; j++){
-					if(typeof obj[j][field] == typeof obj[i][field]){
-						if(obj[j][field] > obj[i][field]){
-							swap = obj[j];
-							obj[j] = obj[i];
-							obj[i] = swap;
+				for(j = i+1; j > 0; j--){
+					if(typeof obj[j][field] === typeof obj[j-1][field]){
+						if(obj[j][field] > obj[j-1][field]){
+							swap = obj[j-1];
+							obj[j-1] = obj[j];
+							obj[j] = swap;
 						}
 					}else{
 						break;
